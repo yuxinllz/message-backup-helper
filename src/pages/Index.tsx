@@ -1,34 +1,59 @@
+import React, { useState } from 'react';
 import Header from "../components/Header";
-import Dashboard from "../components/Dashboard";
-import ContactsList from "../components/ContactsList";
-import ActivityTimeline from "../components/ActivityTimeline";
-import QuickActions from "../components/QuickActions";
+import Step from "../components/Step";
+import { steps } from "../data/steps";
 
 const Index = () => {
+  const [selectedPlatform, setSelectedPlatform] = useState<'macOS' | 'Windows'>('macOS');
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="space-y-12">
-          <div className="space-y-2">
-            <span className="inline-block px-3 py-1 bg-joey-warm text-joey-sage text-sm font-medium rounded-full">
-              Home Overview
-            </span>
-            <h1 className="text-3xl font-bold">Welcome back, Grant</h1>
-            <p className="text-joey-muted">Here's what's happening in your child's digital world</p>
+      <div className="fixed top-20 left-0 right-0 z-10 bg-white shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-center space-x-4">
+            <button
+              onClick={() => setSelectedPlatform('macOS')}
+              className={`px-4 py-2 rounded-lg ${
+                selectedPlatform === 'macOS'
+                  ? 'bg-joey-warm text-joey-sage'
+                  : 'bg-gray-100 text-gray-600'
+              }`}
+            >
+              macOS
+            </button>
+            <button
+              onClick={() => setSelectedPlatform('Windows')}
+              className={`px-4 py-2 rounded-lg ${
+                selectedPlatform === 'Windows'
+                  ? 'bg-joey-warm text-joey-sage'
+                  : 'bg-gray-100 text-gray-600'
+              }`}
+            >
+              Windows
+            </button>
           </div>
-
-          <Dashboard />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <ContactsList />
-            <ActivityTimeline />
-          </div>
-          
-          <QuickActions />
         </div>
-      </main>
+      </div>
+
+      <div className="pt-36 h-screen overflow-y-auto snap-y snap-mandatory">
+        {steps.map((step, index) => {
+          // Skip platform-specific steps that don't match the selected platform
+          if (step.platform && step.platform !== selectedPlatform) {
+            return null;
+          }
+          
+          return (
+            <Step
+              key={`${step.title}-${index}`}
+              title={step.title}
+              content={step.content}
+              platform={step.platform}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
