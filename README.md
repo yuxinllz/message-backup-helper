@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/e7325063-b264-457a-891f-26bc6736eeef/improve
+**URL**: https://lovable.dev/projects/39045d97-53b4-4e2e-aa4d-e28a532edc5a
 
 ## How can I edit this code?
 
@@ -10,7 +10,7 @@ There are several ways of editing your application.
 
 **Use Lovable**
 
-Simply visit the Lovable project at [Lovable](https://lovable.dev/projects/e7325063-b264-457a-891f-26bc6736eeef/improve) and start prompting.
+Simply visit the [Lovable Project](https://lovable.dev/projects/39045d97-53b4-4e2e-aa4d-e28a532edc5a) and start prompting.
 
 Changes made via Lovable will be committed automatically to this repo.
 
@@ -55,15 +55,14 @@ npm run dev
 This project is built with .
 
 - Vite
+- TypeScript
 - React
 - shadcn-ui
 - Tailwind CSS
 
 ## How can I deploy this project?
 
-All Lovable projects can be deployed directly via the Lovable app.
-
-Simply visit your project at [Lovable](https://lovable.dev/projects/e7325063-b264-457a-891f-26bc6736eeef/improve) and click on Share -> Publish.
+Simply open [Lovable](https://lovable.dev/projects/39045d97-53b4-4e2e-aa4d-e28a532edc5a) and click on Share -> Publish.
 
 ## I want to use a custom domain - is that possible?
 
