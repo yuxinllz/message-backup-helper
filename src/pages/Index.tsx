@@ -1,10 +1,43 @@
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Dashboard from "../components/Dashboard";
 import ContactsList from "../components/ContactsList";
 import ActivityTimeline from "../components/ActivityTimeline";
 import QuickActions from "../components/QuickActions";
+import { LoadingPage, LoadingCard } from "../components/ui/loading";
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [contactsLoading, setContactsLoading] = useState(true);
+  const [activitiesLoading, setActivitiesLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate initial page load
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    // Simulate contacts loading
+    const contactsTimer = setTimeout(() => {
+      setContactsLoading(false);
+    }, 1500);
+
+    // Simulate activities loading
+    const activitiesTimer = setTimeout(() => {
+      setActivitiesLoading(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(contactsTimer);
+      clearTimeout(activitiesTimer);
+    };
+  }, []);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div className="min-h-screen bg-joey-warm">
       <Header />
@@ -23,10 +56,18 @@ const Index = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <ContactsList />
+              {contactsLoading ? (
+                <LoadingCard />
+              ) : (
+                <ContactsList />
+              )}
             </div>
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <ActivityTimeline />
+              {activitiesLoading ? (
+                <LoadingCard />
+              ) : (
+                <ActivityTimeline />
+              )}
             </div>
           </div>
           
