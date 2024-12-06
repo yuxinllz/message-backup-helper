@@ -1,4 +1,5 @@
 import { MessageSquare } from "lucide-react";
+import { NoData } from "./ui/no-data";
 
 const ActivityTimeline = () => {
   const activities = [
@@ -32,24 +33,28 @@ const ActivityTimeline = () => {
       </div>
       
       <div className="space-y-4">
-        {activities.map((activity) => {
-          const Icon = activity.icon;
-          
-          return (
-            <div
-              key={activity.id}
-              className="flex items-start space-x-4 p-4 rounded-lg bg-white border border-gray-100 hover:shadow-md transition-all duration-200 ease-in-out transform hover:scale-[1.02]"
-            >
-              <div className="p-2 bg-joey-warm rounded-lg">
-                <Icon className="w-5 h-5 text-joey-sage" />
+        {activities.length === 0 ? (
+          <NoData message="No activity found" />
+        ) : (
+          activities.map((activity) => {
+            const Icon = activity.icon;
+            
+            return (
+              <div
+                key={activity.id}
+                className="flex items-start space-x-4 p-4 rounded-lg bg-white border border-gray-100 hover:shadow-md transition-all duration-200 ease-in-out transform hover:scale-[1.02]"
+              >
+                <div className="p-2 bg-joey-warm rounded-lg">
+                  <Icon className="w-5 h-5 text-joey-sage" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium">{activity.app}</p>
+                  <p className="text-sm text-joey-muted">{activity.messageCount} messages this week</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <p className="font-medium">{activity.app}</p>
-                <p className="text-sm text-joey-muted">{activity.messageCount} messages this week</p>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );
